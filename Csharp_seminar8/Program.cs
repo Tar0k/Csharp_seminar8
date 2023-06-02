@@ -58,7 +58,6 @@ void Task56()
             rowSum[row] += array[row,column];
         }
     }
-
     var result = (Array.IndexOf(rowSum, rowSum.Min()) + 1, rowSum.Min());
     Console.WriteLine($"Строка с наименьшей суммой: {result.Item1} ({result.Item2})");
 }
@@ -75,6 +74,30 @@ void Task58()
     Console.WriteLine("Задача 58");
     var arr1 = Generate2DIntArray(2, 2, 1, 10);
     var arr2 = Generate2DIntArray(2, 2, 1, 10);
+    Console.WriteLine("Массив 1");
+    Print2DArray(arr1);
+    Console.WriteLine("Массив 2");
+    Print2DArray(arr2);
+    if (arr1.GetLength(1) != arr2.GetLength(0))
+    {
+        Console.WriteLine("Данные матрицы нельзя перемножить!");
+        Environment.Exit(0);
+    }
+    Console.WriteLine("Произведение матриц:");
+
+    for (var row1 = 0; row1 < arr1.GetLength(0); row1++)
+    {
+        for (var column1 = 0; column1 < arr1.GetLength(1); column1++)
+        {
+            var temp = 0;
+            for (var row2 = 0; row2 < arr2.GetLength(0); row2++)
+            {
+                temp += arr1[row1, row2] * arr2[row2, column1];
+            }
+            Console.Write(temp + " ");
+        }
+        Console.WriteLine();
+    }
 }
 
 void Task62()
