@@ -5,6 +5,7 @@ var tasks = new Dictionary<int, Action>
     { 54, Task54 },
     { 56, Task56 },
     { 58, Task58 },
+    { 62, Task62 },
 };
 var numbersOfTasks = tasks.Keys.ToArray();
 tasks[GetTaskFromUser(numbersOfTasks)].Invoke();
@@ -55,7 +56,7 @@ void Task56()
     {
         for (var column = 0; column < array.GetLength(1); column++)
         {
-            rowSum[row] += array[row,column];
+            rowSum[row] += array[row, column];
         }
     }
     var result = (Array.IndexOf(rowSum, rowSum.Min()) + 1, rowSum.Min());
@@ -109,6 +110,121 @@ void Task62()
     // 11 16 15 06
     // 10 09 08 07
     Console.WriteLine("Задача 62");
+    var array = Generate2DIntArray(12, 12, 0, 0);
+
+    var limitPlusRow = array.GetLength(0) - 1;
+    var limitMinusRow = 0;
+    var limitPlusColumn = array.GetLength(1) - 1;
+    var limitMinusColumn = 0;
+    
+    // var temp = spiralCycle(
+    //     2,
+    //     limitPlusRow = limitPlusRow,
+    //     limitMinusRow = limitMinusRow,
+    //     limitPlusColumn = limitPlusColumn,
+    //     limitMinusColumn: limitMinusColumn,
+    //     currentPos: (0,0));
+    // spiralCycle(
+    //     temp.Item1,
+    //     temp.Item2,
+    // temp.Item3,
+    //     temp.Item4,
+    //     temp.Item5,
+    //     currentPos: temp.Item6); 
+
+
+    var currentPos = (0, 0);
+    array[0, 0] = 1;
+    var isFinished = false;
+    var iterator = 2;
+
+    do
+    {
+        var temp = spiralCycle(
+            iterator: iterator,
+            limitPlusRow: limitPlusRow,
+            limitMinusRow: limitMinusRow,
+            limitPlusColumn: limitPlusColumn,
+            limitMinusColumn: limitMinusColumn,
+            currentPos: currentPos);
+        isFinished = temp.Item1;
+        iterator = temp.Item2;
+        limitPlusRow = temp.Item3;
+        limitMinusRow = temp.Item4;
+        limitPlusColumn = temp.Item5;
+        limitMinusColumn = temp.Item6;
+        currentPos = temp.Item7;
+    }
+    while (isFinished == false);
+    
+    Print2DArray(array);
+    
+
+    (bool, int, int, int, int, int, (int, int)) spiralCycle(
+        int iterator,
+        int limitPlusRow,
+        int limitMinusRow,
+        int limitPlusColumn,
+        int limitMinusColumn,
+        (int, int) currentPos)
+    {
+        var isCycleFinished = true;
+        if (limitPlusColumn > currentPos.Item2)
+        {
+            isCycleFinished = false;
+            for (var column = currentPos.Item2 + 1; column <= limitPlusColumn; column++)
+            {
+                array[currentPos.Item1, column] = iterator;
+                iterator++;
+                currentPos = (currentPos.Item1, column);
+            }
+            limitMinusRow++;
+            
+        }
+
+        if (limitPlusRow > currentPos.Item1)
+        {
+            isCycleFinished = false;
+            for (var row = currentPos.Item1 + 1; row <= limitPlusRow; row++)
+            {
+                array[row, currentPos.Item2] = iterator;
+                iterator++;
+                currentPos = (row, currentPos.Item2);
+            }
+
+            limitPlusColumn--;
+        }
+
+        if (limitMinusColumn < currentPos.Item2)
+        {
+            isCycleFinished = false;
+            for (var column = currentPos.Item2 - 1; column >= limitMinusColumn; column--)
+            {
+                array[currentPos.Item1, column] = iterator;
+                iterator++;
+                currentPos = (currentPos.Item1, column);
+            }
+            limitPlusRow--;
+            
+        }
+        
+        if (limitMinusRow < currentPos.Item1)
+        {
+            isCycleFinished = false;
+            for (var row = currentPos.Item1 - 1; row >= limitMinusRow; row--)
+            {
+                array[row, currentPos.Item2] = iterator;
+                iterator++;
+                currentPos = (row, currentPos.Item2);
+            }
+        
+            limitMinusColumn++;
+        }
+        
+        return (isCycleFinished, iterator, limitPlusRow, limitMinusRow, limitPlusColumn, limitMinusColumn, currentPos);
+    }
+    
+    
 }
 
 
