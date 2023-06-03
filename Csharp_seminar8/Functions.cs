@@ -111,4 +111,40 @@ public static class Functions
             Console.WriteLine();
         }
     }
+
+    public static void AdvancedPrint2DArray(int[,] array, string filler = " ")
+    {
+        var maxLengthElement = LookingForLongestElement(array);
+        
+        for (var i = 0; i < array.GetLength(0); i++)
+        {
+            for (var j = 0; j < array.GetLength(1); j++)
+            {
+                Console.Write(IntToStringWithLength(array[i,j], maxLengthElement, filler) + " ");
+            }
+            Console.WriteLine();
+        }   
+        
+        
+        int LookingForLongestElement(int[,] arr)
+        {
+            var length = 0;
+            for (var i = 0; i < array.GetLength(0); i++)
+            {
+                for (var j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j].ToString().Length > length) length = array[i, j].ToString().Length;
+                }
+            }
+
+            return length;
+        }
+
+        string IntToStringWithLength(int value, int length, string fillerText)
+        {
+            var text = value.ToString();
+            while (text.Length < length) text = fillerText + text;
+            return text;
+        }
+    }
 }

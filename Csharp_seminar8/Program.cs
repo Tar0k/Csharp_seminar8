@@ -141,7 +141,8 @@ void Task62()
     }
     while (isFinished == false);
     
-    Print2DArray(array);
+    //Print2DArray(array);
+    AdvancedPrint2DArray(array, "0");
     
     (bool, int, int, int, int, int, (int, int)) spiralCycle(
         int iterator,
