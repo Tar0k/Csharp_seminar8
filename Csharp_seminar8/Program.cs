@@ -116,22 +116,6 @@ void Task62()
     var limitMinusRow = 0;
     var limitPlusColumn = array.GetLength(1) - 1;
     var limitMinusColumn = 0;
-    
-    // var temp = spiralCycle(
-    //     2,
-    //     limitPlusRow = limitPlusRow,
-    //     limitMinusRow = limitMinusRow,
-    //     limitPlusColumn = limitPlusColumn,
-    //     limitMinusColumn: limitMinusColumn,
-    //     currentPos: (0,0));
-    // spiralCycle(
-    //     temp.Item1,
-    //     temp.Item2,
-    // temp.Item3,
-    //     temp.Item4,
-    //     temp.Item5,
-    //     currentPos: temp.Item6); 
-
 
     var currentPos = (0, 0);
     array[0, 0] = 1;
@@ -159,7 +143,6 @@ void Task62()
     
     Print2DArray(array);
     
-
     (bool, int, int, int, int, int, (int, int)) spiralCycle(
         int iterator,
         int limitPlusRow,
@@ -179,9 +162,8 @@ void Task62()
                 currentPos = (currentPos.Item1, column);
             }
             limitMinusRow++;
-            
         }
-
+        
         if (limitPlusRow > currentPos.Item1)
         {
             isCycleFinished = false;
