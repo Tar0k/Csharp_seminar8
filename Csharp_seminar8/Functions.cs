@@ -81,7 +81,7 @@ public static class Functions
     }
     
     /// <summary>
-    /// Print out array
+    /// Print out 2D array
     /// </summary>
     /// <param name="array">array, to be printed out</param>
     public static void Print2DArray(int[,] array) 
@@ -97,7 +97,7 @@ public static class Functions
     }
     
     /// <summary>
-    /// Print out array
+    /// Print out 2D array
     /// </summary>
     /// <param name="array">array, to be printed out</param>
     public static void Print2DArray(double[,] array) 
@@ -111,7 +111,11 @@ public static class Functions
             Console.WriteLine();
         }
     }
-
+    /// <summary>
+    /// Print out 2D array with aligned columns by adding filler in front.
+    /// </summary>
+    /// <param name="array">array, to be printed out</param>
+    /// <param name="filler">symbol, which to be added to string in front</param>
     public static void AdvancedPrint2DArray(int[,] array, string filler = " ")
     {
         var maxLengthElement = LookingForLongestElement(array);

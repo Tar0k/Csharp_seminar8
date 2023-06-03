@@ -110,7 +110,7 @@ void Task62()
     // 11 16 15 06
     // 10 09 08 07
     Console.WriteLine("Задача 62");
-    var array = Generate2DIntArray(12, 12, 0, 0);
+    var array = Generate2DIntArray(10, 10, 0, 0);
 
     var limitPlusRow = array.GetLength(0) - 1;
     var limitMinusRow = 0;
